@@ -10,6 +10,20 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <!-- Bootstrap Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+  <!-- Brand icons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/img/favicon-192.png" />
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" />
+
+  <!-- Social card -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Vantiro" />
+  <meta property="og:title" content="About Vantiro — Built for B2B SaaS" />
+  <meta property="og:description" content="About Vantiro: cloud-native SaaS for B2B companies—built to simplify complexity, integrate systems, and enable smarter decisions." />
+  <meta property="og:url" content="https://www.vantiro.io/about-us.html" />
+  <meta property="og:image" content="https://www.vantiro.io/assets/img/vantiro-og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
   <link href="assets/style/common.css" rel="stylesheet" />
   <link href="assets/style/about-us.css" rel="stylesheet" />
 </head>
@@ -18,9 +32,8 @@
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-3" id="topNav">
     <div class="container">
-      <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
-        <span class="brand-mark"></span>
-        Vantiro
+      <a class="navbar-brand" href="index.html" aria-label="Vantiro — home">
+        <img class="brand-logo" src="assets/img/vantiro-logo-light.png" alt="Vantiro" width="125" height="30" />
       </a>
 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,10 +46,10 @@
           <li class="nav-item"><a class="nav-link" href="index.html#why">Why</a></li>
           <li class="nav-item"><a class="nav-link active" aria-current="page" href="#top">About</a></li>
           <li class="nav-item ms-lg-2 mt-3 mt-lg-0">
-            <a class="btn btn-v-ghost px-4 py-2" href="#contact">Talk to an expert</a>
+            <a class="btn btn-v-ghost px-4 py-2" href="#contact" data-v-contact="expert">Talk to an expert</a>
           </li>
           <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
-            <a class="btn btn-v-primary px-4 py-2" href="#contact">Contact</a>
+            <a class="btn btn-v-primary px-4 py-2" href="#contact" data-v-contact="contact">Contact</a>
           </li>
         </ul>
       </div>
@@ -344,14 +357,14 @@
           </div>
           <div class="col-lg-4">
             <div class="d-grid gap-3">
-              <a href="#" class="btn btn-v-primary px-4 py-3">
+              <button type="button" class="btn btn-v-primary px-4 py-3" data-v-contact="expert">
                 <i class="bi bi-chat-dots me-2"></i>
                 Talk to an expert
-              </a>
-              <a href="#" class="btn btn-v-ghost px-4 py-3">
+              </button>
+              <button type="button" class="btn btn-v-ghost px-4 py-3" data-v-contact="contact">
                 <i class="bi bi-envelope-paper me-2"></i>
                 Contact us
-              </a>
+              </button>
             </div>
           </div>
         </div>
@@ -367,9 +380,8 @@
   <footer class="py-4">
     <div class="container">
       <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3">
-        <div class="d-flex align-items-center gap-2">
-          <span class="brand-mark"></span>
-          <div class="fw-semibold">Vantiro</div>
+        <div class="d-flex align-items-center flex-wrap gap-2">
+          <img class="footer-logo me-1" src="assets/img/vantiro-logo-light.png" alt="Vantiro" width="100" height="24" />
           <span class="text-muted-v small">© <span id="year"></span></span>
           <span class="text-muted-v small"> - VAT IT04835440407</span>
         </div>
@@ -378,13 +390,14 @@
           <a class="text-decoration-none text-muted-v" href="index.html#solutions">Solutions</a>
           <a class="text-decoration-none text-muted-v" href="index.html#why">Why</a>
           <a class="text-decoration-none text-muted-v" href="#top">About</a>
-          <a class="text-decoration-none text-muted-v" href="#contact">Contact</a>
+          <a class="text-decoration-none text-muted-v" href="#contact" data-v-contact="contact">Contact</a>
         </div>
       </div>
     </div>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/contact-modal.js" defer></script>
   <script>
     // Navbar glass-on-scroll
     const nav = document.getElementById('topNav');

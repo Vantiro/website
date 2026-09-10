@@ -10,20 +10,48 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <!-- Bootstrap Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+  <!-- Brand icons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/img/favicon-192.png" />
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" />
+
+  <!-- Social card -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Vantiro" />
+  <meta property="og:title" content="Vantiro — Your digital vantage point" />
+  <meta property="og:description" content="Cloud-based SaaS solutions that connect systems, simplify processes, and turn data into real competitive advantage." />
+  <meta property="og:url" content="https://www.vantiro.io/" />
+  <meta property="og:image" content="https://www.vantiro.io/assets/img/vantiro-og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
   <link href="assets/style/common.css" rel="stylesheet" />
   <link href="assets/style/index.css" rel="stylesheet" />
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-N73TJ8LX');</script>
+  <!-- End Google Tag Manager -->
+  <noscript>
+    <style>
+      #topNav[data-brand-reveal] .navbar-brand{ opacity:1; visibility:visible; transform:none; }
+    </style>
+  </noscript>
 
-  <!-- Iubenda -->
-  <script type="text/javascript" src="https://embeds.iubenda.com/widgets/3e5df97d-e9f6-42c0-b840-45a524d6e7e0.js"></script>
+  
 </head>
 
 <body class="bg-grid">
+  <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N73TJ8LX"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-3" id="topNav">
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-3" id="topNav" data-brand-reveal>
     <div class="container">
-      <a class="navbar-brand d-flex align-items-center gap-2" href="#top">
-        <span class="brand-mark"></span>
-        Vantiro
+      <a class="navbar-brand" href="#top" aria-label="Vantiro — home">
+        <img class="brand-logo" src="assets/img/vantiro-logo-light.png" alt="Vantiro" width="125" height="30" />
       </a>
 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,7 +66,7 @@
           <li class="nav-item"><a class="nav-link" href="#why">Why Vantiro</a></li>
           <li class="nav-item"><a class="nav-link" href="#workwith">Who we work with</a></li>
           <li class="nav-item ms-lg-2 mt-3 mt-lg-0">
-            <a class="btn btn-v-ghost px-4 py-2" href="#contact">Talk to an expert</a>
+            <a class="btn btn-v-ghost px-4 py-2" href="#contact" data-v-contact="expert">Talk to an expert</a>
           </li>
           <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
             <a class="btn btn-v-primary px-4 py-2" href="#solutions">Discover our solutions</a>
@@ -53,6 +81,8 @@
     <div class="container">
       <div class="row g-4 align-items-stretch">
         <div class="col-lg-7">
+          <img class="logo-anim" src="assets/img/vantiro-logo-animated.webp" alt="Vantiro" width="800" height="306" fetchpriority="high" />
+
           <div class="v-pill mb-3">
             <i class="bi bi-eye-fill"></i>
             <span>Your digital vantage point</span>
@@ -71,7 +101,7 @@
               <i class="bi bi-arrow-right-circle me-2"></i>
               Discover our solutions
             </a>
-            <a href="#contact" class="btn btn-v-ghost px-4 py-3">
+            <a href="#contact" class="btn btn-v-ghost px-4 py-3" data-v-contact="expert">
               <i class="bi bi-chat-dots me-2"></i>
               Talk to an expert
             </a>
@@ -327,10 +357,10 @@
             <p class="text-muted-v mb-4">
               Vantiro is continuously expanding its SaaS portfolio to support evolving B2B needs.
             </p>
-            <a class="btn btn-v-primary px-4 py-3 w-100" href="#">
+            <button type="button" class="btn btn-v-primary px-4 py-3 w-100" data-v-contact="roadmap">
               <i class="bi bi-stars me-2"></i>
               Discover what’s next
-            </a>
+            </button>
           </div>
         </div>
       </div>
@@ -473,14 +503,14 @@
           </div>
           <div class="col-lg-4">
             <div class="d-grid gap-3">
-              <a href="#" class="btn btn-v-primary px-4 py-3">
+              <button type="button" class="btn btn-v-primary px-4 py-3" data-v-contact="demo">
                 <i class="bi bi-calendar2-week me-2"></i>
                 Book a demo
-              </a>
-              <a href="#" class="btn btn-v-ghost px-4 py-3">
+              </button>
+              <button type="button" class="btn btn-v-ghost px-4 py-3" data-v-contact="contact">
                 <i class="bi bi-envelope-paper me-2"></i>
                 Contact us
-              </a>
+              </button>
             </div>
           </div>
         </div>
@@ -492,9 +522,8 @@
   <footer class="py-4">
     <div class="container">
       <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3">
-        <div class="d-flex align-items-center gap-2">
-          <span class="brand-mark"></span>
-          <div class="fw-semibold">Vantiro</div>
+        <div class="d-flex align-items-center flex-wrap gap-2">
+          <img class="footer-logo me-1" src="assets/img/vantiro-logo-light.png" alt="Vantiro" width="100" height="24" />
           <span class="text-muted-v small">© <span id="year"></span></span>
           <span class="text-muted-v small"> - VAT IT04835440407</span>
           <span class="text-muted-v small"> - Phone +39 0547 174 0026</span>
@@ -504,7 +533,7 @@
           <a class="text-decoration-none text-muted-v" href="#problem">Problem</a>
           <a class="text-decoration-none text-muted-v" href="#solutions">Solutions</a>
           <a class="text-decoration-none text-muted-v" href="#why">Why</a>
-          <a class="text-decoration-none text-muted-v" href="#contact">Contact</a>
+          <a class="text-decoration-none text-muted-v" href="#contact" data-v-contact="contact">Contact</a>
           <a href="/privacy-policy/" class="text-decoration-none text-muted-v" title="Privacy Policy">Privacy Policy</a>
           <a href="/privacy-policy/#cookie-policy" class="text-decoration-none text-muted-v" title="Cookie Policy">Cookie Policy</a>
         </div>
@@ -513,6 +542,7 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/contact-modal.js" defer></script>
   <script>
     // Navbar glass-on-scroll
     const nav = document.getElementById('topNav');
@@ -522,6 +552,25 @@
     };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
+
+    // The hero shows the full animated lockup, so the navbar keeps its logo
+    // hidden until that lockup has scrolled up behind the bar.
+    const heroLogo = document.querySelector('.logo-anim');
+    if (heroLogo && 'IntersectionObserver' in window) {
+      let observer;
+      const watch = () => {
+        if (observer) observer.disconnect();
+        observer = new IntersectionObserver(([entry]) => {
+          nav.classList.toggle('brand-visible', !entry.isIntersecting);
+        }, { rootMargin: `-${nav.offsetHeight}px 0px 0px 0px` });
+        observer.observe(heroLogo);
+      };
+      watch();
+      window.addEventListener('resize', watch);
+    } else {
+      // No IntersectionObserver: no reveal, just show the logo.
+      nav.classList.add('brand-visible');
+    }
 
     // Footer year
     document.getElementById('year').textContent = new Date().getFullYear();

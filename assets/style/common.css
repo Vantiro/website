@@ -51,20 +51,62 @@ body{
   font-weight: 700;
   letter-spacing: -0.02em;
 }
-.brand-mark{
-  width: 10px; height: 10px;
-  border-radius: 99px;
-  background: var(--v-accent);
-  box-shadow: 0 0 0 6px rgba(255,222,90,.14);
-  display:inline-block;
-  margin-right:.55rem;
-  transform: translateY(-1px);
-}
 .nav-link{
   color: rgba(255,255,255,.82) !important;
 }
 .nav-link:hover{
   color: var(--v-white) !important;
+}
+
+/* Brand logo */
+.navbar .navbar-brand{
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.brand-logo{
+  display: block;
+  width: auto;
+  height: 30px;
+}
+/* On pages that already show the brand in the hero (data-brand-reveal on the
+   navbar), the navbar logo stays out of the way at the top of the page and
+   fades in once the hero lockup has scrolled behind the bar. The <a> keeps its
+   box either way, so the nav never reflows; visibility keeps the hidden link
+   out of the tab order. */
+#topNav[data-brand-reveal] .navbar-brand{
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-5px);
+  transition: opacity .4s ease, transform .4s ease, visibility 0s linear .4s;
+}
+#topNav[data-brand-reveal].brand-visible .navbar-brand{
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition: opacity .4s ease, transform .4s ease, visibility 0s;
+}
+
+.footer-logo{
+  height: 24px;
+  width: auto;
+  display: block;
+}
+@media (max-width: 575.98px){
+  .brand-logo{ height: 26px; }
+}
+
+/* Animated brand lockup (hero).
+   The artwork is pre-composited onto --v-black-2 at build time, so it sits
+   flush on the page background without a blend mode. */
+.logo-anim{
+  display: block;
+  width: clamp(210px, 28vw, 320px);
+  height: auto;
+  margin-bottom: 1rem;
+}
+@media (prefers-reduced-motion: reduce){
+  /* still frame instead of the fade-in + slash slide */
+  .logo-anim{ content: url("../img/vantiro-logo-animated-still.webp"); }
 }
 
 /* Buttons */
@@ -155,3 +197,133 @@ footer{
 @media (prefers-reduced-motion: reduce){
   *{ scroll-behavior:auto !important; transition:none !important; }
 }
+
+
+/* ---------------------------------------------------------------------------
+   Contact modal — every "talk to us" CTA opens this instead of navigating.
+   The HubSpot form is injected into #vContactFormTarget by
+   assets/js/contact-modal.js
+--------------------------------------------------------------------------- */
+.v-modal .modal-content{
+  background: linear-gradient(180deg, #0e1114, #0a0c0e);
+  border: 1px solid var(--v-border-2);
+  border-radius: calc(var(--v-radius) + 6px);
+  box-shadow: var(--v-shadow);
+  color: var(--v-white);
+  overflow: hidden;
+  position: relative;
+}
+.v-modal .modal-content::before{
+  content:"";
+  position:absolute; inset:-2px; bottom:auto; height: 320px;
+  background:
+    radial-gradient(620px 300px at 12% 0%, rgba(255,222,90,.20), transparent 62%),
+    radial-gradient(460px 280px at 92% 0%, rgba(1,155,251,.16), transparent 62%);
+  pointer-events:none;
+}
+.v-modal .modal-content > *{ position: relative; z-index: 1; }
+
+.v-modal .modal-header{
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  padding: 1.35rem 1.5rem 1.15rem;
+  align-items: flex-start;
+}
+.v-modal .modal-body{ padding: 1.5rem; }
+.v-modal .modal-footer{
+  border-top: 1px solid rgba(255,255,255,.08);
+  padding: .9rem 1.5rem;
+  justify-content: flex-start;
+}
+.v-modal .btn-close{
+  filter: invert(1) grayscale(1);
+  opacity: .55;
+}
+.v-modal .btn-close:hover{ opacity: .9; }
+
+.v-modal-mark{
+  height: 34px; width: auto;
+  margin-bottom: .85rem;
+  display: block;
+}
+.v-modal-title{
+  font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+  letter-spacing: -0.03em;
+  font-weight: 700;
+  margin: 0;
+}
+.v-modal-sub{
+  color: var(--v-muted);
+  margin: .5rem 0 0;
+  max-width: 52ch;
+}
+
+/* Placeholder shown until the HubSpot form is configured */
+.v-form-fallback{
+  border: 1px dashed rgba(255,255,255,.16);
+  border-radius: 14px;
+  background: rgba(0,0,0,.22);
+  padding: 1.25rem;
+}
+.v-form-fallback .bi{ color: var(--v-accent); }
+.v-contact-link{
+  color: var(--v-white);
+  text-decoration: none;
+  font-weight: 650;
+}
+.v-contact-link:hover{ color: var(--v-accent); }
+
+/* HubSpot form, restyled for the dark surface */
+#vContactFormTarget .hs-form-field{ margin-bottom: 1rem; }
+#vContactFormTarget label{
+  color: rgba(255,255,255,.82);
+  font-size: .9rem;
+  font-weight: 600;
+  margin-bottom: .35rem;
+  display: inline-block;
+}
+#vContactFormTarget .hs-form-field > label .hs-form-required{ color: var(--v-accent); }
+#vContactFormTarget input[type="text"],
+#vContactFormTarget input[type="email"],
+#vContactFormTarget input[type="tel"],
+#vContactFormTarget input[type="number"],
+#vContactFormTarget select,
+#vContactFormTarget textarea{
+  width: 100% !important;
+  background: rgba(255,255,255,.04);
+  border: 1px solid var(--v-border-2);
+  border-radius: 12px;
+  color: var(--v-white);
+  padding: .7rem .9rem;
+  outline: none;
+}
+#vContactFormTarget input::placeholder,
+#vContactFormTarget textarea::placeholder{ color: rgba(255,255,255,.42); }
+#vContactFormTarget input:focus,
+#vContactFormTarget select:focus,
+#vContactFormTarget textarea:focus{
+  border-color: rgba(255,222,90,.55);
+  box-shadow: 0 0 0 3px rgba(255,222,90,.14);
+}
+#vContactFormTarget select option{ background: #0e1114; color: var(--v-white); }
+#vContactFormTarget .hs-button{
+  background: var(--v-accent);
+  border: 1px solid var(--v-accent);
+  color: #1f1a00;
+  border-radius: 999px;
+  font-weight: 700;
+  padding: .75rem 1.6rem;
+  box-shadow: 0 12px 34px rgba(255,222,90,.20);
+  cursor: pointer;
+}
+#vContactFormTarget .hs-button:hover{ background: #f2d14a; border-color: #f2d14a; }
+#vContactFormTarget .hs-error-msg,
+#vContactFormTarget .hs-error-msgs label{ color: #ff8f8f; font-size: .85rem; }
+#vContactFormTarget .legal-consent-container,
+#vContactFormTarget .hs-richtext{
+  color: var(--v-muted);
+  font-size: .85rem;
+}
+#vContactFormTarget .legal-consent-container a,
+#vContactFormTarget .hs-richtext a{ color: var(--v-accent); }
+#vContactFormTarget .inputs-list{ list-style: none; padding-left: 0; }
+#vContactFormTarget .submitted-message{ color: var(--v-white); }
