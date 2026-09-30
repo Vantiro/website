@@ -26,6 +26,7 @@
 
   <link href="assets/style/common.css" rel="stylesheet" />
   <link href="assets/style/index.css" rel="stylesheet" />
+  <script>document.documentElement.classList.add("js");</script>
   <!-- Google Tag Manager -->
   <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -160,6 +161,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </header>
 
+  <div class="page-flow">
+  <main>
   <!-- Problem -->
   <section id="problem" class="py-5 band-light">
     <div class="container py-2 py-md-4">
@@ -499,6 +502,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </section>
 
+  </main>
+
   <!-- Footer -->
   <footer class="py-4">
     <div class="container">
@@ -521,6 +526,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </div>
   </footer>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="assets/js/contact-modal.js" defer></script>
@@ -534,23 +540,60 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
 
-    // The hero shows the full animated lockup, so the navbar keeps its logo
-    // hidden until that lockup has scrolled up behind the bar.
-    const heroLogo = document.querySelector('.logo-anim');
-    if (heroLogo && 'IntersectionObserver' in window) {
-      let observer;
-      const watch = () => {
-        if (observer) observer.disconnect();
-        observer = new IntersectionObserver(([entry]) => {
-          nav.classList.toggle('brand-visible', !entry.isIntersecting);
-        }, { rootMargin: `-${nav.offsetHeight}px 0px 0px 0px` });
-        observer.observe(heroLogo);
-      };
-      watch();
-      window.addEventListener('resize', watch);
+    // The hero stays pinned while the page slides over it, so an
+    // IntersectionObserver can't tell when it is being covered. The navbar logo
+    // fades in by scroll distance instead: once half of the hero is gone.
+    const hero = document.getElementById('top');
+    const pinned = window.matchMedia('(min-width: 992px) and (min-height: 640px)');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const LOGO_AT = 0.5; // share of the hero height that must be covered
+
+    let ticking = false;
+    const onFrame = () => {
+      ticking = false;
+      const y = window.scrollY;
+      nav.classList.toggle('brand-visible', y > hero.offsetHeight * LOGO_AT);
+      // Dim the pinned hero as the next section covers it.
+      if (pinned.matches && !reduceMotion.matches) {
+        const p = Math.min(Math.max(y / hero.offsetHeight, 0), 1);
+        hero.style.setProperty('--hero-cover', p.toFixed(3));
+      } else {
+        hero.style.removeProperty('--hero-cover');
+      }
+    };
+    window.addEventListener('scroll', () => {
+      if (!ticking) { ticking = true; requestAnimationFrame(onFrame); }
+    }, { passive: true });
+    onFrame();
+
+    // Scroll reveals: left column slides in from the left, right column from
+    // the right, solution cards alternate. Without JS (or with reduced motion)
+    // everything is simply visible.
+    const mark = (el, dir, i = 0) => {
+      if (!el) return;
+      el.setAttribute('data-reveal', dir);
+      el.style.setProperty('--reveal-delay', (i * 90) + 'ms');
+    };
+    document.querySelectorAll('.page-flow section').forEach(sec => {
+      if (sec.id === 'solutions') {
+        mark(sec.querySelector(':scope > .container > .mb-4'), 'left');
+        sec.querySelectorAll(':scope > .container > .row > div').forEach((c, i) => mark(c, i % 2 ? 'right' : 'left', Math.floor(i / 2)));
+        return;
+      }
+      const cols = sec.querySelectorAll(':scope > .container > .row > [class*="col-"]');
+      if (cols.length >= 2) { mark(cols[0], 'left'); mark(cols[1], 'right', 1); return; }
+      mark(sec.querySelector('.cta-band'), 'left');
+    });
+    const targets = document.querySelectorAll('[data-reveal]');
+    if ('IntersectionObserver' in window && !reduceMotion.matches) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) { e.target.classList.add('in-view'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+      targets.forEach(t => io.observe(t));
     } else {
-      // No IntersectionObserver: no reveal, just show the logo.
-      nav.classList.add('brand-visible');
+      targets.forEach(t => t.classList.add('in-view'));
     }
 
     // Footer year

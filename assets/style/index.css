@@ -18,10 +18,6 @@
 }
 
 /* Hero */
-.hero{
-  padding-top: 6.25rem;
-  padding-bottom: 4.5rem;
-}
 .hero-card{
   position: relative;
   overflow: hidden;
@@ -84,4 +80,66 @@ a.stat:hover, a.stat:focus-visible{
 .solution-badge .dot{
   width:8px;height:8px;border-radius:99px;background: var(--v-accent);
   box-shadow: 0 0 0 5px rgba(0,249,206,.16);
+}
+
+/* ---------------------------------------------------------------------------
+   Pinned hero + overlapping page
+   The hero fills the viewport and stays fixed in place; everything after it
+   (.page-flow) scrolls up over it. Only on screens tall/wide enough that the
+   whole hero fits, otherwise it scrolls normally.
+--------------------------------------------------------------------------- */
+html, body{ height: auto; }
+body{ min-height: 100%; }
+
+.hero{
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding-top: 6.5rem;
+  padding-bottom: 3rem;
+}
+.hero > .container{ width: 100%; }
+
+.page-flow{
+  position: relative;
+  z-index: 1;
+  background: var(--v-black-2);
+  overflow-x: clip;               /* slide-in offsets must not create a scrollbar */
+}
+@media (min-width: 992px) and (min-height: 640px){
+  .hero{
+    position: sticky;
+    top: 0;
+    z-index: 0;
+  }
+  .hero > .container{
+    /* recede slightly as the page covers it (--hero-cover is set from JS) */
+    opacity: calc(1 - var(--hero-cover, 0) * .7);
+    transform: scale(calc(1 - var(--hero-cover, 0) * .04));
+    transform-origin: 50% 30%;
+    will-change: opacity, transform;
+  }
+  .page-flow{
+    border-radius: 28px 28px 0 0;
+    box-shadow: 0 -24px 60px rgba(0,0,0,.55);
+  }
+}
+
+/* Scroll reveals */
+.js [data-reveal]{
+  opacity: 0;
+  transform: translateX(-56px);
+  transition: opacity .7s cubic-bezier(.2,.7,.2,1) var(--reveal-delay, 0ms),
+              transform .7s cubic-bezier(.2,.7,.2,1) var(--reveal-delay, 0ms);
+}
+.js [data-reveal="right"]{ transform: translateX(56px); }
+.js [data-reveal].in-view{ opacity: 1; transform: none; }
+
+@media (max-width: 991.98px){
+  .js [data-reveal]{ transform: translateX(-28px); }
+  .js [data-reveal="right"]{ transform: translateX(28px); }
+}
+@media (prefers-reduced-motion: reduce){
+  .js [data-reveal]{ opacity: 1; transform: none; transition: none; }
 }
