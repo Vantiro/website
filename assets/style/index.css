@@ -47,6 +47,15 @@
   color: var(--v-accent);
   font-size: 1.25rem;
 }
+a.stat{
+  color: inherit;
+  transition: border-color .15s ease, background .15s ease;
+}
+a.stat:hover, a.stat:focus-visible{
+  color: inherit;
+  border-color: var(--v-accent);
+  background: rgba(0,0,0,.30);
+}
 
 /* Solution cards */
 .solution-card{

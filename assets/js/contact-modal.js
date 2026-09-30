@@ -47,19 +47,19 @@
   var COPY = {
     expert: {
       title: "Talk to an expert",
-      sub: "Tell us about your systems and your data. We'll come back with a concrete view of what Vantiro can connect, simplify, and accelerate."
+      sub: "Tell us which systems you run and what’s not connecting. We’ll reply with a straight answer on what we can do."
     },
     demo: {
       title: "Book a demo",
-      sub: "See how our SaaS solutions integrate with the tools you already run — walked through by someone who has done it before."
+      sub: "Tell us which product or problem you’re looking at. We’ll show you how it would work in your setup."
     },
     contact: {
       title: "Get in touch",
-      sub: "Questions about our solutions, integrations, or roadmap? Leave your details and we'll get back to you shortly."
+      sub: "Questions about a product, a project or pricing? Leave your details and we’ll reply."
     },
     roadmap: {
-      title: "Be first to know what's next",
-      sub: "We're continuously expanding the Vantiro SaaS portfolio. Tell us what you need and we'll keep you posted as new solutions ship."
+      title: "Tell us what you need",
+      sub: "Describe the problem you’re trying to fix, on HubSpot, AWS or anywhere else. We’ll tell you plainly whether we can help."
     }
   };
 
@@ -105,8 +105,8 @@
       '  <div class="d-flex gap-3 align-items-start">',
       '    <i class="bi bi-telephone-fill fs-4"></i>',
       '    <div>',
-      '      <div class="fw-semibold mb-1">Our contact form is being set up.</div>',
-      '      <div class="text-muted-v mb-3">In the meantime, call us and we\'ll take it from there.</div>',
+      '      <div class="fw-semibold mb-1">The form didn\'t load.</div>',
+      '      <div class="text-muted-v mb-3">Call us and we\'ll pick it up from there.</div>',
       '      <a class="v-contact-link fs-5" href="' + PHONE_HREF + '">' + PHONE + "</a>",
       "    </div>",
       "  </div>",
